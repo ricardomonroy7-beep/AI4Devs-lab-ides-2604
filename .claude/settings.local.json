@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(docker-compose up *)",
+      "Bash(docker start *)",
+      "Bash(npx prisma *)",
+      "Bash(docker exec *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(curl -s -w '\\\\nHTTP_STATUS:%{http_code}\\\\n' -X POST http://localhost:3010/api/candidates -F firstName=Test -F lastName=User -F email=txt__CMDSUB_OUTPUT__@test.com -F 'cv=@/tmp/test_doc.txt;type=text/plain')",
+      "Bash(curl -s -w '\\\\nHTTP_STATUS:%{http_code}\\\\n' -X POST http://localhost:3010/api/candidates -F firstName=Pedro -F lastName=López -F email=__TRACKED_VAR__ -F 'cv=@/tmp/test_cv.pdf;type=application/pdf')",
+      "Bash(curl -s -w '\\\\nHTTP_STATUS:%{http_code}\\\\n' -X POST http://localhost:3010/api/candidates -F firstName=Test -F lastName=User -F email=txt__CMDSUB_OUTPUT__@test.com -F 'cv=@test_doc.txt;type=text/plain')",
+      "Bash(curl -s -w '\\\\nHTTP_STATUS:%{http_code}\\\\n' -X POST http://localhost:3010/api/candidates -F firstName=Pedro -F lastName=López -F email=pdf__CMDSUB_OUTPUT__@example.com -F 'cv=@test_cv.pdf;type=application/pdf')"
+    ]
+  }
+}

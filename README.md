@@ -189,3 +189,86 @@ Para detener el contenedor Docker, ejecuta el siguiente comando:
 ```
 docker-compose down
 ```
+
+---
+
+## Pasos extra para arrancar (no documentados originalmente) | RMA
+
+Los pasos siguientes son necesarios para levantar el proyecto correctamente y no estaban
+documentados en la versión original del repo.
+
+### 1. Fix del `DATABASE_URL` en `backend/.env`
+
+El archivo `.env` original usa interpolación de variables (`${DB_USER}`) que `dotenv`
+**no expande**. Antes de ejecutar Prisma, reemplaza la línea con la URL literal:
+
+```env
+# ❌ Así estaba (roto):
+DATABASE_URL="postgresql://${DB_USER}:${DB_PASSWORD}@localhost:${DB_PORT}/${DB_NAME}"
+
+# ✅ Así debe quedar:
+DATABASE_URL="postgresql://LTIdbUser:D1ymf8wyQEGthFR1E9xhCq@localhost:5432/LTIdb"
+```
+
+### 2. Levantar Docker **antes** que el backend
+
+PostgreSQL debe estar corriendo antes de ejecutar cualquier comando de Prisma o iniciar el servidor:
+
+```bash
+# Desde la raíz del repo
+docker-compose up -d
+
+# Verificar que el contenedor esté up
+docker ps
+```
+
+### 3. Instalar dependencias (no incluidas en el repo)
+
+```bash
+cd backend && npm install
+cd ../frontend && npm install
+```
+
+### 4. Instalar dependencias adicionales del backend (feature RMA)
+
+```bash
+cd backend
+npm install multer zod@3 cors
+npm install -D @types/multer @types/cors
+```
+
+> **Nota:** Usar `zod@3` (no `zod@4`). El proyecto usa TypeScript 4.9.5 que es
+> incompatible con los tipos de Zod v4 (require `using` keyword de TS 5+).
+
+### 5. Ejecutar migraciones Prisma y generar el cliente
+
+```bash
+cd backend
+npx prisma migrate dev --name add_candidate_and_document
+npx prisma generate
+```
+
+### 6. Carpeta de uploads
+
+La carpeta `backend/uploads/` está en `.gitignore` para no subir CVs al repo.
+El archivo `.gitkeep` garantiza que la carpeta se cree al clonar. Si falta:
+
+```bash
+mkdir backend/uploads
+```
+
+### 7. Orden de arranque recomendado
+
+```bash
+# Terminal 1 — PostgreSQL
+docker-compose up -d
+
+# Terminal 2 — Backend (desde /backend)
+npm run dev
+
+# Terminal 3 — Frontend (desde /frontend)
+npm start
+```
+
+- Backend: http://localhost:3010 → debe responder `Hola LTI!`
+- Frontend: http://localhost:3000 → debe mostrar el Dashboard del Reclutador

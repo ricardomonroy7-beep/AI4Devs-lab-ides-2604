@@ -1,0 +1,48 @@
+// Listas estáticas para autocompletado — análogo a constantes en un módulo Python.
+// No requieren endpoint de backend; son sugerencias locales que complementan texto libre.
+
+export const EDUCATION_SUGGESTIONS: string[] = [
+  'UNAM — Universidad Nacional Autónoma de México',
+  'IPN — Instituto Politécnico Nacional',
+  'Tec de Monterrey — ITESM',
+  'UAM — Universidad Autónoma Metropolitana',
+  'UIA — Universidad Iberoamericana',
+  'UDLAP — Universidad de las Américas Puebla',
+  'UP — Universidad Panamericana',
+  'ITAM — Instituto Tecnológico Autónomo de México',
+  'Universidad de Guadalajara',
+  'BUAP — Benemérita Universidad Autónoma de Puebla',
+  'UANL — Universidad Autónoma de Nuevo León',
+  'UADY — Universidad Autónoma de Yucatán',
+  'UVM — Universidad del Valle de México',
+  'CETYS Universidad',
+  'Tecnológico de Monterrey — Campus Estado de México',
+  'Universidad Anáhuac',
+  'UABCS — Universidad Autónoma de Baja California Sur',
+  'UdeG — CUCEI',
+  'IPN — ESIME',
+  'UNAM — Facultad de Ingeniería',
+];
+
+export const WORK_EXPERIENCE_SUGGESTIONS: string[] = [
+  'Software Engineer',
+  'Frontend Developer',
+  'Backend Developer',
+  'Full Stack Developer',
+  'Project Manager',
+  'Product Manager',
+  'Data Scientist',
+  'Data Analyst',
+  'DevOps Engineer',
+  'QA Engineer',
+  'UX/UI Designer',
+  'Scrum Master',
+  'Tech Lead',
+  'Engineering Manager',
+  'Business Analyst',
+  'Systems Architect',
+  'Mobile Developer',
+  'Machine Learning Engineer',
+  'Database Administrator',
+  'Cybersecurity Analyst',
+];

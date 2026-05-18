@@ -27,3 +27,6 @@ yarn-error.log*
 
 # .env
 
+# CV uploads (archivos físicos, no se commitean)
+backend/uploads/*
+!backend/uploads/.gitkeep
